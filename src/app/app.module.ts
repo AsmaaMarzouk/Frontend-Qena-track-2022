@@ -7,6 +7,11 @@ import { HeaderComponent } from './Components/header/header.component';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { HomeComponent } from './Components/home/home.component';
 import { FooterComponent } from './Components/footer/footer.component';
+import { FormsModule } from '@angular/forms';
+import { ProductsComponent } from './Components/products/products.component';
+import { ColorBoxDirective } from './Directives/color-box.directive';
+import { UsdtoEgpPipe } from './Pipes/usdto-egp.pipe';
+
 
 @NgModule({
   declarations: [
@@ -14,11 +19,15 @@ import { FooterComponent } from './Components/footer/footer.component';
     HeaderComponent,
     SidebarComponent,
     HomeComponent,
-    FooterComponent
+    FooterComponent,
+    ProductsComponent,
+    ColorBoxDirective,
+    UsdtoEgpPipe
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

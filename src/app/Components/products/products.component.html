@@ -1,0 +1,117 @@
+<!--Hint For lab assignment -->
+<div class="mb-3">
+    <label for="prdCat">Select Category:</label>
+    <select name="cat" id="prdCat" class="form-control" [(ngModel)]="selectedCatID">
+        <option *ngFor="let cat of catlList" [value]="cat.id">{{cat.name}}</option>
+    </select>
+<p>{{selectedCatID}}</p>
+</div>
+
+
+<!--Date pipe  -->
+<!-- <div class="m-2">
+    Cuurent Date : {{todayDate | date}}
+
+</div> -->
+
+
+<table class="table m-2">
+  <thead>
+    <tr class="bg-dark text-light">
+      <th scope="col">No.</th>
+      <th scope="col">Name</th>
+      <th scope="col">Image</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Price in USD</th>
+      <th scope="col">Price in EGP</th>
+      <th scope="col">Buy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- ngFor -->
+    <!-- built in variables -->
+    <!-- <tr *ngFor="let prd of prdList;let i=index" [hidden]="prd.quantity==0">-->
+    <!-- <td>{{prd.id}}</td> -->
+    <!-- <td>{{i+1}}</td>
+            <td>{{prd.name}}</td>
+            <td><img [src]="prd.imgURL" alt=""></td>
+            <td>{{prd.quantity}}</td>
+            <td>{{prd.price}}</td> -->
+    <!--  -->
+    <!-- <td><button class="btn btn-success" [disabled]="prd.quantity==0">Buy</button></td> -->
+    <!-- <td><button class="btn btn-success" [hidden]="prd.quantity==0">Buy</button></td> -->
+
+    <!-- </tr> -->
+
+
+    <!-- class  / style property binding -->
+    <!-- <tr *ngFor="let prd of prdList;let i=index" [class.bg-warning]="prd.quantity==0"> -->
+    <!-- ternary operator ? true: false-->
+    <!-- <tr *ngFor="let prd of prdList;let i=index" [style.background-color]="(prd.quantity==0)?'yellow':'lightblue'">
+            <td>{{i+1}}</td>
+            <td>{{prd.name}}</td>
+            <td><img [src]="prd.imgURL" alt=""></td>
+            <td>{{prd.quantity}}</td>
+            <td>{{prd.price}}</td>
+            <td><button class="btn btn-success" [disabled]="prd.quantity==0">Buy</button></td>
+
+        </tr> -->
+
+
+    <!-- <tr *ngFor="let prd of prdList;let i=index;trackBy:trackByFunc">
+            <td>{{i+1}}</td>
+            <td>{{prd.name}}</td>
+            <td><img [src]="prd.imgURL" alt=""></td>
+            <td>{{prd.quantity}}</td>
+            <td>{{prd.price}}</td>
+            <td><button class="btn btn-success" [disabled]="prd.quantity==0">Buy</button></td>
+
+        </tr> -->
+
+
+
+    <!-- virtual containers  -->
+    <!-- ng-container ng-content ng-template -->
+
+    <ng-container *ngFor="let prd of prdList;let i=index;trackBy:trackByFunc" >
+      <!-- <tr [ngClass]="{'bg-warning':prd.quantity==0,'text-danger':prd.quantity==0}"> -->
+        <!-- <tr [ngStyle]="{'background-color':(prd.quantity==0)?'yellow':'lightblue','color':(prd.quantity==0)?'red':'blue'}"> -->
+            <tr [ngStyle]="{'background-color':(prd.quantity==0)?'yellow':'lightblue','color':(prd.quantity==0)?'red':'blue'}">
+        <td>{{i+1}}</td>
+        <td>{{prd.name | uppercase}}</td>
+        <td><img [src]="prd.imgURL" alt="" LightBox="brown" hoverColor="yellow"></td>
+        <!-- <td>{{prd.quantity}}</td> -->
+        <td>
+            <!-- <span *ngIf="prd.quantity>0">{{prd.quantity}}</span>
+            <span *ngIf="prd.quantity==0">out of stock</span> -->
+
+           <!-- <span *ngIf="prd.quantity>0;else outOfStock">{{prd.quantity}}</span> -->
+           <!-- template reference =>#referenceToElement  -->
+           <!-- <ng-template #outOfStock>Out of Stock</ng-template> -->
+
+           <!-- <ng-container *ngIf="prd.quantity>0;else outOfStock">{{prd.quantity}}</ng-container>
+           <ng-template #outOfStock>Out of Stock</ng-template> -->
+
+           <ng-container [ngSwitch]="prd.quantity">
+           <ng-container *ngSwitchCase="0">Out of stock</ng-container>
+           <ng-container *ngSwitchCase="1">Last Item!!</ng-container>
+           <ng-container *ngSwitchCase="2">Last two Item!!</ng-container>
+           <ng-container *ngSwitchDefault>{{prd.quantity}}</ng-container>
+
+
+           </ng-container>
+
+
+        </td>
+
+        <!-- <td>{{prd.price | currency:'USD':'code'}}</td> -->
+        <td>{{prd.price | currency:'USD':'code'}}</td>
+        <td>{{prd.price | usdtoEgp:20 | currency:'EGP'}}</td>
+        <td><button class="btn btn-success" [disabled]="prd.quantity==0">Buy</button></td>
+      </tr>
+    </ng-container>
+  </tbody>
+
+
+
+</table>

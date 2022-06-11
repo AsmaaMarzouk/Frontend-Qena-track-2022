@@ -4,7 +4,11 @@
 <!-- From class -->
 <!-- <h1>Store Name from class : {{storedata.name}}</h1> -->
 
-<img *ngIf="showImg" src="{{storeInfo.coverImage}}" >
+<!-- <img *ngIf="showImg" src="{{storeInfo.coverImage}}" > -->
+
+<!-- Day2 -->
+<!-- Property Binding -->
+<img *ngIf="showImg" [src]="storeInfo.coverImage" >
 <!-- <img src="{{storedata.imgURL}}" > -->
 
 <h3>
@@ -22,3 +26,17 @@
 <!-- toggle button -->
 <!-- event binding -->
 <button (click)="toggleImage()">Toggle img</button>
+
+
+<!-- Day2 -->
+<!-- input -->
+<!-- property binding -->
+<!-- one way binding -->
+<!-- <input type="text" class="form-control" name="username" id="username" [value]="customerFeedback"> -->
+
+<!-- two way binding -->
+<input type="text" class="form-control" name="username" id="username" [(ngModel)]="customerFeedback">
+
+
+<br>
+<p>For test: {{customerFeedback}}</p>

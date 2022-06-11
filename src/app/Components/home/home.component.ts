@@ -11,6 +11,8 @@ export class HomeComponent implements OnInit {
 // property with boolean type
 // flag
 showImg:boolean = true;
+// Day2
+customerFeedback:string ="GoodTest";
 
   // Interface
   storeInfo:StoreInfo={name:'ITI Store',
