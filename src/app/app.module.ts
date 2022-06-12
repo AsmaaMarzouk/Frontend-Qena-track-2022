@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { ProductsComponent } from './Components/products/products.component';
 import { ColorBoxDirective } from './Directives/color-box.directive';
 import { UsdtoEgpPipe } from './Pipes/usdto-egp.pipe';
+import { OrederMasterComponent } from './Components/oreder-master/oreder-master.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { UsdtoEgpPipe } from './Pipes/usdto-egp.pipe';
     FooterComponent,
     ProductsComponent,
     ColorBoxDirective,
-    UsdtoEgpPipe
+    UsdtoEgpPipe,
+    OrederMasterComponent
   ],
   imports: [
     BrowserModule,

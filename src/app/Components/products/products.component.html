@@ -1,11 +1,11 @@
 <!--Hint For lab assignment -->
-<div class="mb-3">
+<!-- <div class="mb-3">
     <label for="prdCat">Select Category:</label>
     <select name="cat" id="prdCat" class="form-control" [(ngModel)]="selectedCatID">
         <option *ngFor="let cat of catlList" [value]="cat.id">{{cat.name}}</option>
     </select>
 <p>{{selectedCatID}}</p>
-</div>
+</div> -->
 
 
 <!--Date pipe  -->
@@ -24,6 +24,7 @@
       <th scope="col">Quantity</th>
       <th scope="col">Price in USD</th>
       <th scope="col">Price in EGP</th>
+      <th scope="col">Count of product</th>
       <th scope="col">Buy</th>
     </tr>
   </thead>
@@ -73,13 +74,13 @@
     <!-- virtual containers  -->
     <!-- ng-container ng-content ng-template -->
 
-    <ng-container *ngFor="let prd of prdList;let i=index;trackBy:trackByFunc" >
+    <ng-container *ngFor="let prd of prdListOfCat;let i=index;trackBy:trackByFunc" >
       <!-- <tr [ngClass]="{'bg-warning':prd.quantity==0,'text-danger':prd.quantity==0}"> -->
         <!-- <tr [ngStyle]="{'background-color':(prd.quantity==0)?'yellow':'lightblue','color':(prd.quantity==0)?'red':'blue'}"> -->
             <tr [ngStyle]="{'background-color':(prd.quantity==0)?'yellow':'lightblue','color':(prd.quantity==0)?'red':'blue'}">
         <td>{{i+1}}</td>
         <td>{{prd.name | uppercase}}</td>
-        <td><img [src]="prd.imgURL" alt="" LightBox="brown" hoverColor="yellow"></td>
+        <td><img [src]="prd.imgURL" alt="" LightBox="brown" hoverColor="green"></td>
         <!-- <td>{{prd.quantity}}</td> -->
         <td>
             <!-- <span *ngIf="prd.quantity>0">{{prd.quantity}}</span>
@@ -107,11 +108,16 @@
         <!-- <td>{{prd.price | currency:'USD':'code'}}</td> -->
         <td>{{prd.price | currency:'USD':'code'}}</td>
         <td>{{prd.price | usdtoEgp:20 | currency:'EGP'}}</td>
-        <td><button class="btn btn-success" [disabled]="prd.quantity==0">Buy</button></td>
+        <td><input type="number" class="form-control" #itemCount></td>
+        <td><button class="btn btn-success" [disabled]="prd.quantity==0"  (click)="updateTotalPrice(prd.price,itemCount.value)">Buy</button></td>
       </tr>
     </ng-container>
   </tbody>
-
-
-
 </table>
+
+
+
+<br>
+<div class="bg-success">
+  <h1>For test total price: {{orderTotalPrice}}</h1>
+</div>

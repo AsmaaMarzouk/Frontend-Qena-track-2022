@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Icategory } from 'src/app/Models/icategory';
 import { Iproduct } from 'src/app/Models/iproduct';
 
@@ -7,18 +7,25 @@ import { Iproduct } from 'src/app/Models/iproduct';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit,OnChanges {
   // date
   todayDate:Date=new Date();
 // declare array from interface => Iproduct
 prdList:Iproduct[];
+// Day3
+prdListOfCat: Iproduct[]=[];
+@Input() receivedCatID:number = 0;
+orderTotalPrice:number=0;
 
-
-
+@Output() totalPriceChanged:EventEmitter<number>;
+// Day2
 // Category array
-catlList:Icategory[];
+// catlList:Icategory[];
 selectedCatID:number = 0;
+
   constructor() {
+    // create object of event EventEmitter
+    this.totalPriceChanged=new EventEmitter<number>();
     this.prdList=[
       {id:1,name: 'Samsung',price:20000,quantity:0,imgURL:'https://fakeimg.pl/250x100',catID:1},
       {id:5,name: 'IPhone',price:60000,quantity:2,imgURL:'https://fakeimg.pl/250x100',catID:1},
@@ -30,18 +37,52 @@ selectedCatID:number = 0;
 
 
     // categories
-    this.catlList=[
-      {id:1,name: 'Mobiles'},
-      {id:2,name: 'LabTops'},
-      {id:3,name: 'TV'},
-    ];
+    // this.catlList=[
+    //   {id:1,name: 'Mobiles'},
+    //   {id:2,name: 'LabTops'},
+    //   {id:3,name: 'TV'},
+    // ];
    }
-   trackByFunc(index:number,item:Iproduct){
+  ngOnChanges(): void {
+    this.getProductOfCat();
+   
+  }
+
+
+  ngOnInit(): void {
+    // this.getProductOfCat();
+  }
+
+
+  trackByFunc(index:number,item:Iproduct){
     return item.id;
 
    }
 
-  ngOnInit(): void {
-  }
+  private getProductOfCat(){
+
+    if(this.receivedCatID==0){
+      this.prdListOfCat=Array.from(this.prdList);
+      return;
+
+    }
+    this.prdListOfCat=this.prdList.filter((prd)=>prd.catID==this.receivedCatID);
+
+   }
+
+
+   updateTotalPrice(prdPrice:number,itemCounts:any) {
+    // this.orderTotalPrice +=(prdPrice*itemCounts);
+    //ways of convert string to number
+    // this.orderTotalPrice +=(prdPrice* parseInt(itemCounts));
+    // this.orderTotalPrice +=(prdPrice* Number(itemCounts));
+    // this.orderTotalPrice +=(prdPrice* itemCounts as number);
+    this.orderTotalPrice +=(prdPrice* +itemCounts);
+
+    // to fire event use emit
+    this.totalPriceChanged.emit(this.orderTotalPrice);
+
+   }
+
 
 }

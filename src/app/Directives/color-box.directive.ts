@@ -1,9 +1,9 @@
-import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Directive({
   selector: '[LightBox]'
 })
-export class ColorBoxDirective {
+export class ColorBoxDirective implements OnChanges {
 // document.getElementById("").style.backgroundColor =
 // borderColor:string ="red";
 
@@ -11,9 +11,14 @@ export class ColorBoxDirective {
 @Input('LightBox') DefaultColor:string ="blue";
   constructor(private elem:ElementRef) {
     // elem.nativeElement.style.border=`2px solid ${this.borderColor}`;
-    elem.nativeElement.style.border=`2px solid ${this.DefaultColor}`;
+    // elem.nativeElement.style.border=`2px solid ${this.DefaultColor}`;
 
    }
+  ngOnChanges(): void {
+    this.elem.nativeElement.style.border=`2px solid ${this.DefaultColor}`;
+    
+  }
+
 
 
  @HostListener('mouseenter')  onMouseEnter(){
