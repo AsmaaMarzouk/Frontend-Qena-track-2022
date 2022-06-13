@@ -12,6 +12,9 @@ import { ProductsComponent } from './Components/products/products.component';
 import { ColorBoxDirective } from './Directives/color-box.directive';
 import { UsdtoEgpPipe } from './Pipes/usdto-egp.pipe';
 import { OrederMasterComponent } from './Components/oreder-master/oreder-master.component';
+import { NotFoundPageComponent } from './Components/not-found-page/not-found-page.component';
+import { MainLayoutComponent } from './Components/main-layout/main-layout.component';
+import { ProductDetailsComponent } from './Components/product-details/product-details.component';
 
 
 @NgModule({
@@ -24,7 +27,10 @@ import { OrederMasterComponent } from './Components/oreder-master/oreder-master.
     ProductsComponent,
     ColorBoxDirective,
     UsdtoEgpPipe,
-    OrederMasterComponent
+    OrederMasterComponent,
+    NotFoundPageComponent,
+    MainLayoutComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,

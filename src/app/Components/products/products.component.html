@@ -25,6 +25,7 @@
       <th scope="col">Price in USD</th>
       <th scope="col">Price in EGP</th>
       <th scope="col">Count of product</th>
+      <th scope="col">Details</th>
       <th scope="col">Buy</th>
     </tr>
   </thead>
@@ -109,6 +110,9 @@
         <td>{{prd.price | currency:'USD':'code'}}</td>
         <td>{{prd.price | usdtoEgp:20 | currency:'EGP'}}</td>
         <td><input type="number" class="form-control" #itemCount></td>
+        <!-- Day4 -->
+        <td><button (click)="openProductDetails(prd.id)" class="btn btn-info">Details</button></td>
+        <!-- <td><a  class="btn btn-info" [routerLink]="['/Products',prd.id]">Details</a></td> -->
         <td><button class="btn btn-success" [disabled]="prd.quantity==0"  (click)="updateTotalPrice(prd.price,itemCount.value)">Buy</button></td>
       </tr>
     </ng-container>
