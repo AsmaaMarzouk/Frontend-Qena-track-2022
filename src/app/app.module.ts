@@ -15,6 +15,7 @@ import { OrederMasterComponent } from './Components/oreder-master/oreder-master.
 import { NotFoundPageComponent } from './Components/not-found-page/not-found-page.component';
 import { MainLayoutComponent } from './Components/main-layout/main-layout.component';
 import { ProductDetailsComponent } from './Components/product-details/product-details.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { ProductDetailsComponent } from './Components/product-details/product-de
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
