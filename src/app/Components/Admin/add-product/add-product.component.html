@@ -1,0 +1,65 @@
+<!-- First test case -->
+<!-- <button (click)="InsertProduct()" class="btn btn-success">Add</button> -->
+<!-- template driven forms -->
+<form #prdForm="ngForm" (ngSubmit)="InsertProduct()">
+
+
+  <div class="mb-3">
+    <label for="prdName" class="form-label">Product Name</label>
+
+    <input type="text" #prdNameInput="ngModel" class="form-control" name="prdName" id="prdName" [(ngModel)]="newPrd.name" required pattern="[A-Za-z]{3,10}" [class.is-valid]="prdNameInput.valid" [class.is-invalid]="prdNameInput.invalid">
+    <!-- <div [hidden]="prdNameInput.valid" class="alert alert-danger">
+        Name is required and must be 3 letters at least
+    </div> -->
+    <!-- <div [hidden]="prdNameInput.valid || prdNameInput.untouched" class="alert alert-danger">
+        Name is required and must be 3 letters at least
+    </div> -->
+    <!-- <div [hidden]="prdNameInput.valid || prdNameInput.untouched" class="alert alert-danger">
+        <small *ngIf="prdNameInput.errors?.['required']">
+            Product name is required
+        </small>
+        <small *ngIf="prdNameInput.errors?.['pattern']">
+            Product name must be at least 3 letters
+        </small>
+    </div> -->
+
+    <div [hidden]="prdNameInput.valid || prdNameInput.untouched" class="alert alert-danger">
+        <small *ngIf="prdNameInput.errors?.['required']">
+            Product name is required
+        </small>
+        <small *ngIf="prdNameInput.errors?.['pattern']">
+            Product name must be at least 3 letters
+        </small>
+    </div>
+  </div>
+
+
+  <div class="mb-3">
+    <label for="prdQuant" class="form-label">Quantity</label>
+    <input type="number" class="form-control" name="prdQuant" id="prdQuant" required [(ngModel)]="newPrd.quantity">
+  </div>
+
+  <div class="mb-3">
+    <label for="prdPrc" class="form-label">Price</label>
+    <input type="number" class="form-control" name="prdPrc" id="prdPrc" required [(ngModel)]="newPrd.price">
+  </div>
+
+  <div class="mb-3">
+    <label for="prdCat" class="form-label">Select Category</label>
+    <select class="form-control" name="catId" id="cat" required [(ngModel)]="newPrd.catID">
+
+      <option *ngFor="let cat of catlList" [value]="cat.id">
+        {{cat.name}}
+      </option>
+    </select>
+  </div>
+
+
+  <button [disabled]="prdForm.invalid" type="submit" class="btn btn-success">Submit</button>
+</form>
+
+<hr>
+<!-- pipe => json -->
+<!-- <h2>{{newPrd | json}}</h2> -->
+<!-- <h2>{{prdNameInput.className | json}}</h2> -->
+<h2>{{prdNameInput.errors | json}}</h2>

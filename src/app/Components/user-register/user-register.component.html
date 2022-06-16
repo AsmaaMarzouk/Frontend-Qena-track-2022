@@ -1,0 +1,136 @@
+<!-- First test case -->
+<!-- <form [formGroup]="usrFormGroup" class="m-2">
+
+    <div class="mb-3">
+      <label for="usrName" class="form-label">Full Name</label>
+     
+      <input type="text" class="form-control" name="usrName" id="usrName" formControlName="fullName" [class.is-valid]="usrFormGroup.get('fullName')?.valid" [class.is-invalid]="usrFormGroup.get('fullName')?.invalid">
+      <div class="alert alert-warning" [hidden]="usrFormGroup.get('fullName')?.valid || usrFormGroup.get('fullName')?.untouched">
+
+        <small *ngIf="usrFormGroup.get('fullName')?.errors?.['required']">
+
+            Full Name is required
+        </small>
+        <small *ngIf="usrFormGroup.get('fullName')?.errors?.['minlength']">
+
+            Full Name must be at least 3 letters
+        </small>
+      </div>
+    </div>
+  
+    <div class="mb-3">
+      <label for="usrEmail" class="form-label">Email</label>
+      <input type="email" class="form-control" name="usrEmail" id="usrEmail" formControlName="email">
+    </div>
+  
+   
+   
+      <div class="mb-3 ms-4">
+        <label for="usrMobile" class="form-label">Mobile No.</label>
+        <input type="number"  class="form-control" name="usrMobile" id="usrMobile" formControlName="mobileNo">
+      </div>
+
+  
+    <div formGroupName="address">
+      Address:
+      <div class="mb-3 ms-2">
+        <label for="usrCity" class="form-label">city</label>
+        <input type="text" class="form-control" name="usrCity" id="usrCity" formControlName="city">
+      </div>
+      <div class="mb-3 ms-2">
+        <label for="usrStreet" class="form-label">Street</label>
+        <input type="text"  class="form-control" name="usrStreet" id="usrStreet" formControlName="street">
+      </div>
+    </div>
+  
+  
+    <div class="mb-3">
+      <label for="usrPass" class="form-label">Password</label>
+      <input type="password" class="form-control" name="usrPass" id="usrPass">
+    </div>
+  
+    <div class="mb-3">
+      <label for="usrRePass" class="form-label">Retype Password</label>
+      <input type="password"  class="form-control" name="usrRePass" id="usrRePass">
+    </div>
+  
+   
+  
+  
+  <br>
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+  
+  <hr>
+  <h2>{{usrFormGroup.value | json}}</h2>
+   -->
+
+
+
+   <form [formGroup]="usrFormGroup" class="m-2">
+    <div class="mb-3">
+      <label for="usrName" class="form-label">Full Name</label>
+     
+      <input type="text" class="form-control" name="usrName" id="usrName" formControlName="fullName" [class.is-valid]="fullName?.valid" [class.is-invalid]="fullName?.invalid">
+      <div class="alert alert-warning" [hidden]="fullName?.valid || fullName?.untouched">
+
+        <small *ngIf="fullName?.errors?.['required']">
+
+            Full Name is required
+        </small>
+        <small *ngIf="fullName?.errors?.['minlength']">
+
+            Full Name must be at least 3 letters
+        </small>
+      </div>
+    </div>
+  
+    <div class="mb-3">
+      <label for="usrEmail" class="form-label">Email</label>
+      <input type="email" class="form-control" name="usrEmail" id="usrEmail" formControlName="email">
+    </div>
+  
+   
+   
+    <div formArrayName="mobileNo">
+      <div class="mb-3 ms-4" *ngFor="let mob of mobileNo.controls;let i=index">
+        <label for="usrMobile{{i+1}}" class="form-label">Mobile No.{{i+1}}</label>
+        <input type="number"  class="form-control" name="usrMobile{{i+1}}" id="usrMobile{{i+1}}" [formControlName]="i">
+      <button  *ngIf="mob.value&&i==mobileNo.controls.length-1" (click)="addMobile()" class="btn btn-primary d-block ms-auto">+</button>
+
+      </div>
+    </div>
+  
+    <div formGroupName="address">
+      Address:
+      <div class="mb-3 ms-2">
+        <label for="usrCity" class="form-label">city</label>
+        <input type="text" class="form-control" name="usrCity" id="usrCity" formControlName="city">
+      </div>
+      <div class="mb-3 ms-2">
+        <label for="usrStreet" class="form-label">Street</label>
+        <input type="text"  class="form-control" name="usrStreet" id="usrStreet" formControlName="street">
+      </div>
+    </div>
+  
+  
+    <div class="mb-3">
+      <label for="usrPass" class="form-label">Password</label>
+      <input type="password" class="form-control" name="usrPass" id="usrPass" formControlName="password">
+    </div>
+  
+    <div class="mb-3">
+      <label for="usrRePass" class="form-label">Retype Password</label>
+      <input type="password"  class="form-control" name="usrRePass" id="usrRePass" formControlName="rePassword">
+    </div>
+  
+   
+  
+  
+  <br>
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+  
+  <hr>
+  <h2>{{usrFormGroup.value | json}}</h2>
+  
