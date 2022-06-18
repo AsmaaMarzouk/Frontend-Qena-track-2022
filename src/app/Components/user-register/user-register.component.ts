@@ -28,6 +28,8 @@ export class UserRegisterComponent implements OnInit {
         street:[''],
 
       }),
+      referral:[''],
+      referralOther:[''],
       password:[''],
       rePassword:['']
     })
@@ -41,10 +43,38 @@ export class UserRegisterComponent implements OnInit {
     return this.usrFormGroup.get('mobileNo') as FormArray;
   }
 
+  get referral(){
+    return this.usrFormGroup.get('referral');
+  }
+
+updateReferralValidition(){
+  if(this.referral?.value=='other')
+  {
+    this.usrFormGroup.get('referralOther')?.addValidators([Validators.required]);
+  }
+  else{
+    this.usrFormGroup.clearValidators();
+  }
+  this.usrFormGroup.get('referralOther')?.updateValueAndValidity();
+
+}
+
+
   addMobile(){
     this.mobileNo.push(this.fb.control(''));
   }
   ngOnInit(): void {
+    // setValue //patchValue
+    // this.usrFormGroup.setValue({
+    //   fullName:"Test",
+    //   email:"test@gmail.com"
+    // })
+
+    // this.usrFormGroup.patchValue({
+    //   fullName:"Test",
+    //   email:"test@gmail.com",
+    //   address:{city:"city1",street:"Street1"}
+    // })
   }
 
 }

@@ -125,10 +125,28 @@
     </div>
   
    
+    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+      <input type="radio" class="btn-check"  name="referral" id="btnradio1" autocomplete="off"
+        value="SocialMedia" formControlName="referral" (change)="updateReferralValidition()">
+      <label class="btn btn-outline-primary" for="btnradio1">Social media</label>
+      <input type="radio" class="btn-check"  name="referral" id="btnradio2" autocomplete="off"
+        value="Friend" formControlName="referral" (change)="updateReferralValidition()">
+      <label class="btn btn-outline-primary" for="btnradio2">from a Friend</label>
+      <input type="radio" class="btn-check"  name="referral" id="btnradio3" autocomplete="off"
+        value="other" formControlName="referral" (change)="updateReferralValidition()">
+      <label class="btn btn-outline-primary" for="btnradio3">other</label>
+    </div>
+  
+    <div *ngIf="referral?.value=='other'">
+      <label for="">Specify other: </label>
+      <input type="text" class="form-control" name="referralOther" id="referralOther" formControlName="referralOther">
+
+    </div>
+
   
   
   <br>
-    <button type="submit" class="btn btn-success">Submit</button>
+    <button type="submit" class="btn btn-success" [disabled]="usrFormGroup.invalid">Submit</button>
   </form>
   
   <hr>
